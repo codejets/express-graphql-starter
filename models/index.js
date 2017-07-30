@@ -7,13 +7,15 @@ const sequelize = new Sequelize('pomoapp_test', 'test', 'test', {
 
 const db = {
   User: sequelize.import('./user'),
+  TodoList: sequelize.import('./todolist'),
+  TodoItem: sequelize.import('./todoitem'),
 };
 
-// Object.keys(db).forEach(function(modelName) {
-//   if ("associate" in db[modelName]) {
-//     db[modelName].associate(db);
-//   }
-// });
+Object.keys(db).forEach(function(modelName) {
+  if ("associate" in db[modelName]) {
+    db[modelName].associate(db);
+  }
+});
 
 db.sequelize = sequelize;
 
