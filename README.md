@@ -21,6 +21,8 @@
 
 * `Twitter OAuth`
 * `Github OAuth`
+* `Migration Routine`
 * `Trello Integration`
 * `Todoist Integration`
+* `Session on Redis`
 * `Subscription`

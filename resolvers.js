@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import _ from 'lodash';
+import { isAuthenticated } from './utils/permissions';
 
 export default {
   User: {
@@ -77,7 +78,7 @@ export default {
         APP_SECRET,
         {
           expiresIn: '1y',
-        }
+        },
       );
       return token;
     },
@@ -90,7 +91,11 @@ export default {
       models.User.update({ username: newUsername }, { where: { username } }),
     deleteUser: (parent, args, { models }) =>
       models.User.destroy({ where: args }),
-    createTodoList: (parent, args, { models }) => models.TodoList.create(args),
-    createTodoItem: (parent, args, { models }) => models.TodoItem.create(args),
+    createTodoList: isAuthenticated.createResolver((parent, args, { models }) =>
+      models.TodoList.create(args),
+    ),
+    createTodoItem: isAuthenticated.createResolver((parent, args, { models }) =>
+      models.TodoItem.create(args),
+    ),
   },
 };

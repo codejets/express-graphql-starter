@@ -1,5 +1,3 @@
-/* @flow */
-
 import { GraphQLError } from 'graphql';
 
 export default class ValidationError extends GraphQLError {
